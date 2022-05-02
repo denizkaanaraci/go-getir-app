@@ -1,5 +1,7 @@
 # Getir Case Challenge
 
+https://go-getir-app.herokuapp.com/
+
 ### Requirements
 
 go 1.18
@@ -14,7 +16,7 @@ go 1.18
 ### run: 
         ./go-getir
 
-## docker
+### docker
 
     build:
         docker build -t go-getir .
@@ -25,6 +27,13 @@ go 1.18
     interactive run: 
         docker run -it --rm -p 8080:8080 --name go-getir go-getir
 
+### heroku
+    docker build -t go-getir .
+    
+    heroku container:push web -a go-getir-app
+
+    heroku container:release web -a go-getir-app
+
 ## Endpoints
 
 ### Get Records from MongoDB
@@ -33,7 +42,7 @@ go 1.18
 
 **Method:** `POST`
 
-**Example URL:** http://0.0.0.0:8080/record
+**Example URL:** https://go-getir-app.herokuapp.com/record
 
 **Request Example:** 
 
@@ -71,7 +80,7 @@ go 1.18
 
 **Method:** `POST`
 
-**Example URL:** http://0.0.0.0:8080/in-memory
+**Example URL:** https://go-getir-app.herokuapp.com/in-memory
 
 **Request Example:**
 
@@ -107,15 +116,8 @@ go 1.18
 
 **Params:** `key: key`
 
-**Example:** http://0.0.0.0:8080/candidate/5b758c6151d9590001def630/delete
 
-### Arrange Meeting
-
-**URI:** `/meeting/arrange`
-
-**Method:** `POST`
-
-**Example URL:** localhost:8080/in-memory?key=active-tabs
+**Example URL:** https://go-getir-app.herokuapp.com/in-memory?key=active-tabs
 
 **Response Example:**
 

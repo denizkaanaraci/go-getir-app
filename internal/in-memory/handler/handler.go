@@ -31,7 +31,7 @@ func (h *handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			helper.RespondWithError(w, http.StatusNotFound, err.Error())
 			return
 		}
-		helper.RespondWithJSON(w, http.StatusCreated, model.GetResponse{Key: key, Value: value})
+		helper.RespondWithJSON(w, http.StatusOK, model.GetResponse{Key: key, Value: value})
 	case http.MethodPost:
 		var modelRequest model.SetRequest
 
@@ -46,7 +46,7 @@ func (h *handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 		h.inMemoryService.Set(modelRequest.Key, modelRequest.Value)
 
-		helper.RespondWithJSON(w, http.StatusOK, model.SetResponse{Key: modelRequest.Key, Value: modelRequest.Value})
+		helper.RespondWithJSON(w, http.StatusCreated, model.SetResponse{Key: modelRequest.Key, Value: modelRequest.Value})
 
 	default:
 		w.WriteHeader(http.StatusNotImplemented)

@@ -20,11 +20,18 @@ func initServer(cfg *config.Configuration) *http.Server {
 
 	routes := setup.SetupRoutes(services)
 
+	// port trick for heroku
+	port := os.Getenv("PORT")
+
+	if port == "" {
+		port = cfg.Server.Port
+	}
+
 	server := &http.Server{
-		Addr:         ":" + cfg.Server.Port, // configure the bind address
-		ReadTimeout:  50 * time.Second,      // max time to read request from the client
-		WriteTimeout: 100 * time.Second,     // max time to write response to the client
-		IdleTimeout:  12 * time.Second,      // max time for connections using TCP Keep-Alive
+		Addr:         ":" + port,        // configure the bind address
+		ReadTimeout:  50 * time.Second,  // max time to read request from the client
+		WriteTimeout: 100 * time.Second, // max time to write response to the client
+		IdleTimeout:  12 * time.Second,  // max time for connections using TCP Keep-Alive
 	}
 
 	server.Handler = routes
